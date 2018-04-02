@@ -5,6 +5,12 @@
     <Authors>Steven Pears</Authors>
     <Description>Small helper library that allows you to create Alexa.NET Responses using a fluent interface</Description>
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</PackageProjectUrl>
+    <Version>1.0.0</Version>
+    <Company />
+    <Product />
+    <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse/LICENSE</PackageLicenseUrl>
+    <PackageReleaseNotes>Initial structure</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
