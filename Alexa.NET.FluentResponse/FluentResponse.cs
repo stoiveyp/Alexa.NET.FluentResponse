@@ -30,5 +30,11 @@ namespace Alexa.NET.FluentResponse
             _response.Response.OutputSpeech = new SsmlOutputSpeech { Ssml = speech.ToXml() };
             return this;
         }
+
+        public IFluentResponse AddSpeech(IOutputSpeech speech)
+        {
+            _response.Response.OutputSpeech = speech;
+            return this;
+        }
     }
 }

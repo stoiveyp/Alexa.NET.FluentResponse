@@ -28,5 +28,15 @@ namespace Alexa.NET.FluentResponse.Tests
             Assert.Equal("<speak>test</speak>", plainText.Ssml);
             Assert.NotNull(result);     
         }
+
+        [Fact]
+        public void AddIOutputSpeech()
+        {
+            var response = new SkillResponse();
+            var output = new PlainTextOutputSpeech { Text = "xxx" };
+            var result = response.Fluent().AddSpeech(output);
+            Assert.NotNull(result);
+            Assert.Equal(output, result.Response.Response.OutputSpeech);
+        }
     }
 }
