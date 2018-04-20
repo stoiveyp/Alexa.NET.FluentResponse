@@ -11,7 +11,7 @@
     <Product />
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>Add initial support for speech and reprompt</PackageReleaseNotes>
+    <PackageReleaseNotes>Add support for WithSimpleCard</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

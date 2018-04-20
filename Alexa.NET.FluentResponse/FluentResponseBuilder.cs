@@ -8,11 +8,13 @@ namespace Alexa.NET.FluentResponse
     {
         IOutputSpeech _speech = null;
         Reprompt _reprompt = null;
+        ICard _card = null;
 
         public SkillResponse Response => new SkillResponse { 
             Response = new ResponseBody {
                 OutputSpeech = _speech,
-                Reprompt = _reprompt
+                Reprompt = _reprompt,
+                Card = _card
             } };
 
         public IFluentResponse AddSpeech(string text)
@@ -49,6 +51,12 @@ namespace Alexa.NET.FluentResponse
         {
             _reprompt = new Reprompt { OutputSpeech = speech };
             return this;            
+        }
+
+        public IFluentResponse WithSimpleCard(string title, string content)
+        {
+            _card = new SimpleCard { Title = title, Content = content };
+            return this;
         }
     }
 }
