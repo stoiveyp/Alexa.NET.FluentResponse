@@ -10,21 +10,19 @@ namespace Alexa.NET.FluentResponse.Tests
         [Fact]
         public void AddSpeechPlain()
         {
-            var response = new SkillResponse();
-            var result = response.Fluent().AddSpeech("test");
+            var response = Fluent.Builder().AddSpeech("test").Response;
             Assert.IsType<PlainTextOutputSpeech>(response.Response.OutputSpeech);
             var plainText = (PlainTextOutputSpeech)response.Response.OutputSpeech;
             Assert.Equal("test", plainText.Text);
-            Assert.NotNull(result);
+            Assert.NotNull(response);
         }
 
         [Fact]
         public void AddSpeechSsml()
         {
-            var response = new SkillResponse();
-            var result = response.Fluent().AddSpeech(new Speech(new PlainText("test")));
-            Assert.IsType<SsmlOutputSpeech>(response.Response.OutputSpeech);
-            var plainText = (SsmlOutputSpeech)response.Response.OutputSpeech;
+            var result = Fluent.Builder().AddSpeech(new Speech(new PlainText("test"))).Response;
+            Assert.IsType<SsmlOutputSpeech>(result.Response.OutputSpeech);
+            var plainText = (SsmlOutputSpeech)result.Response.OutputSpeech;
             Assert.Equal("<speak>test</speak>", plainText.Ssml);
             Assert.NotNull(result);     
         }
@@ -32,11 +30,10 @@ namespace Alexa.NET.FluentResponse.Tests
         [Fact]
         public void AddIOutputSpeech()
         {
-            var response = new SkillResponse();
             var output = new PlainTextOutputSpeech { Text = "xxx" };
-            var result = response.Fluent().AddSpeech(output);
+            var result = Fluent.Builder().AddSpeech(output).Response;
             Assert.NotNull(result);
-            Assert.Equal(output, result.Response.Response.OutputSpeech);
+            Assert.Equal(output, result.Response.OutputSpeech);
         }
     }
 }
