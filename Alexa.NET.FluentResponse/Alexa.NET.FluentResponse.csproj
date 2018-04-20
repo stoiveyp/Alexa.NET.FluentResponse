@@ -10,7 +10,8 @@
     <Product />
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>Initial structure</PackageReleaseNotes>
+    <PackageReleaseNotes>Add initial support for speech and reprompt</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
