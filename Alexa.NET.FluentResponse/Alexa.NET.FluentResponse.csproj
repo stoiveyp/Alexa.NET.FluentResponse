@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <Authors>Steven Pears</Authors>
     <Description>Small helper library that allows you to create Alexa.NET Responses using a fluent interface</Description>
     <PackageProjectUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</PackageProjectUrl>
