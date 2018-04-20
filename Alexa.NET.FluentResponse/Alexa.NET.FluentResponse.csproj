@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Internals\" />
+    <PackageReference Include="Alexa.NET" Version="1.5.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Alexa.NET" Version="1.5.1" />
+    <Compile Remove="IFluentResponseSpeechSet.cs" />
   </ItemGroup>
 </Project>

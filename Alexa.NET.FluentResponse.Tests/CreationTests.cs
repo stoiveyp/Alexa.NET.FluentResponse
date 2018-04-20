@@ -6,18 +6,10 @@ namespace Alexa.NET.FluentResponse.Tests
     public class CreationTests
     {      
         [Fact]
-        public void FromSpeechGeneratesBuilder()
+        public void FluentBuilderGenerates()
 		{
-			var builder = new SkillResponse().Fluent();
+            var builder = Fluent.Builder();
 			Assert.NotNull(builder);
 		}
-
-        [Fact]
-        public void ResponsePropertyAccessesOriginalResponse()
-        {
-            var response = new SkillResponse();
-            var result = response.Fluent().Response;
-            Assert.Equal(result, response);
-        }
     }
 }
