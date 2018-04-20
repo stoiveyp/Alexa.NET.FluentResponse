@@ -15,5 +15,7 @@ namespace Alexa.NET.FluentResponse
         IFluentResponse WithReprompt(string text);
         IFluentResponse WithReprompt(Speech ssml);
         IFluentResponse WithReprompt(IOutputSpeech output);
+
+        IFluentResponse WithSimpleCard(string title, string content);
     }
 }
