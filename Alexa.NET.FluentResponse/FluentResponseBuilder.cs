@@ -1,62 +1,69 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Alexa.NET.Request;
 using Alexa.NET.Response;
+using Alexa.NET.Response.Directive;
 using Alexa.NET.Response.Ssml;
 
 namespace Alexa.NET.FluentResponse
 {
     public class FluentResponseBuilder:IFluentResponse
     {
-        IOutputSpeech _speech = null;
-        Reprompt _reprompt = null;
-        ICard _card = null;
+        private IOutputSpeech Speech;
+        private Reprompt SpeechReprompt;
+        private ICard Card;
+        private readonly List<IDirective> Directives = new List<IDirective>();
+        private bool? _shouldEndSession = null;
 
         public SkillResponse Response => new SkillResponse { 
             Response = new ResponseBody {
-                OutputSpeech = _speech,
-                Reprompt = _reprompt,
-                Card = _card
+                OutputSpeech = Speech,
+                Reprompt = SpeechReprompt,
+                Card = Card,
+                Directives = Directives,
+                ShouldEndSession = _shouldEndSession
             } };
 
-        public IFluentResponse AddSpeech(string text)
+        public IFluentResponse Speak(string text)
         {
-            _speech = new PlainTextOutputSpeech { Text = text };
+            Speech = new PlainTextOutputSpeech { Text = text };
             return this;
         }
 
-        public IFluentResponse AddSpeech(Speech speech)
+        public IFluentResponse Speak(Speech speech)
         {
-            _speech = new SsmlOutputSpeech { Ssml = speech.ToXml() };
+            Speech = new SsmlOutputSpeech { Ssml = speech.ToXml() };
             return this;
         }
 
-        public IFluentResponse AddSpeech(IOutputSpeech speech)
+        public IFluentResponse Speak(IOutputSpeech speech)
         {
-           _speech = speech;
+           Speech = speech;
             return this;
         }
 
-		public IFluentResponse WithReprompt(string text)
+		public IFluentResponse Reprompt(string text)
         {
-            _reprompt = new Reprompt { OutputSpeech = new PlainTextOutputSpeech { Text = text } };
+            SpeechReprompt = new Reprompt { OutputSpeech = new PlainTextOutputSpeech { Text = text } };
             return this;
         }
 
-        public IFluentResponse WithReprompt(Speech ssml)
+        public IFluentResponse Reprompt(Speech ssml)
         {
-            _reprompt = new Reprompt { OutputSpeech = new SsmlOutputSpeech { Ssml = ssml.ToXml() } };
+            SpeechReprompt = new Reprompt { OutputSpeech = new SsmlOutputSpeech { Ssml = ssml.ToXml() } };
             return this;
         }
 
-        public IFluentResponse WithReprompt(IOutputSpeech speech)
+        public IFluentResponse Reprompt(IOutputSpeech speech)
         {
-            _reprompt = new Reprompt { OutputSpeech = speech };
+            SpeechReprompt = new Reprompt { OutputSpeech = speech };
             return this;            
         }
 
         public IFluentResponse WithSimpleCard(string title, string content)
         {
-            _card = new SimpleCard { Title = title, Content = content };
+            Card = new SimpleCard { Title = title, Content = content };
             return this;
         }
 
@@ -74,19 +81,67 @@ namespace Alexa.NET.FluentResponse
 				card.Image = new CardImage { SmallImageUrl = smallImageUri, LargeImageUrl = largeImageUri };
 			}
 
-			_card = card;
+			Card = card;
 			return this;
 		}
 
         public IFluentResponse WithLinkAccountCard()
         {
-            _card = new LinkAccountCard();
+            Card = new LinkAccountCard();
             return this;
         }
 
         public IFluentResponse WithAskForPermissionConsentCard(params string[] permissions)
         {
-            _card = new AskForPermissionsConsentCard{Permissions=permissions.ToList()};
+            Card = new AskForPermissionsConsentCard{Permissions=permissions.ToList()};
+            return this;
+        }
+
+        public IFluentResponse AddDelegateDirective()
+        {
+            Directives.Add(new DialogDelegate());
+            return this;
+        }
+
+        public IFluentResponse AddDelegateDirective(Intent updatedIntent)
+        {
+            Directives.Add(new DialogDelegate{UpdatedIntent = updatedIntent });
+            return this;
+        }
+
+        public IFluentResponse AddElicitSlotDirective(string slotName)
+        {
+            Directives.Add(new DialogElicitSlot(slotName));
+            return this;
+        }
+
+        public IFluentResponse AddElicitSlotDirective(string slotName, Intent updatedIntent)
+        {
+            Directives.Add(new DialogElicitSlot(slotName){UpdatedIntent = updatedIntent });
+            return this;
+        }
+
+        public IFluentResponse AddConfirmSlotDirective(string slotName)
+        {
+            Directives.Add(new DialogConfirmSlot(slotName));
+            return this;
+        }
+
+        public IFluentResponse AddConfirmSlotDirective(string slotName, Intent updatedIntent)
+        {
+            Directives.Add(new DialogConfirmSlot(slotName){UpdatedIntent= updatedIntent });
+            return this;
+        }
+
+        public IFluentResponse AddConfirmIntentDirective()
+        {
+            Directives.Add(new DialogConfirmIntent());
+            return this;
+        }
+
+        public IFluentResponse AddConfirmIntentDirective(Intent updatedIntent)
+        {
+            Directives.Add(new DialogConfirmIntent{UpdatedIntent = updatedIntent});
             return this;
         }
     }

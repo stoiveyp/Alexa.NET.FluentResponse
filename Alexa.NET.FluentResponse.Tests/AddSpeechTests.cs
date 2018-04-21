@@ -10,7 +10,7 @@ namespace Alexa.NET.FluentResponse.Tests
         [Fact]
         public void AddSpeechPlain()
         {
-            var response = Fluent.Builder().AddSpeech("test").Response;
+            var response = Fluent.Builder().Speak("test").Response;
             Assert.IsType<PlainTextOutputSpeech>(response.Response.OutputSpeech);
             var plainText = (PlainTextOutputSpeech)response.Response.OutputSpeech;
             Assert.Equal("test", plainText.Text);
@@ -20,7 +20,7 @@ namespace Alexa.NET.FluentResponse.Tests
         [Fact]
         public void AddSpeechSsml()
         {
-            var result = Fluent.Builder().AddSpeech(new Speech(new PlainText("test"))).Response;
+            var result = Fluent.Builder().Speak(new Speech(new PlainText("test"))).Response;
             Assert.IsType<SsmlOutputSpeech>(result.Response.OutputSpeech);
             var plainText = (SsmlOutputSpeech)result.Response.OutputSpeech;
             Assert.Equal("<speak>test</speak>", plainText.Ssml);
@@ -31,7 +31,7 @@ namespace Alexa.NET.FluentResponse.Tests
         public void AddIOutputSpeech()
         {
             var output = new PlainTextOutputSpeech { Text = "xxx" };
-            var result = Fluent.Builder().AddSpeech(output).Response;
+            var result = Fluent.Builder().Speak(output).Response;
             Assert.NotNull(result);
             Assert.Equal(output, result.Response.OutputSpeech);
         }
