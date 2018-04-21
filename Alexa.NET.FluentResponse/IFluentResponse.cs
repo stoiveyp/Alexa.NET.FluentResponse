@@ -1,6 +1,7 @@
 ﻿using System;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
+using Alexa.NET.Response.Directive;
 using Alexa.NET.Response.Ssml;
 
 namespace Alexa.NET.FluentResponse
@@ -31,5 +32,8 @@ namespace Alexa.NET.FluentResponse
         IFluentResponse AddConfirmSlotDirective(string slotName, Intent updatedIntent);
         IFluentResponse AddConfirmIntentDirective();
         IFluentResponse AddConfirmIntentDirective(Intent updatedIntent);
+        IFluentResponse AddAudioPlayerPlayDirective(PlayBehavior behavior, string url, int offsetMilliseconds, string previousToken);
+        IFluentResponse AddAudioPlayerStopDirective();
+        IFluentResponse AddAudioPlayerClearQueueDirective(ClearBehavior behavior);
     }
 }
