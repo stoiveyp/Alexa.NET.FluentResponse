@@ -11,7 +11,7 @@
     <Product />
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>Add display support (render template, video app and hints)</PackageReleaseNotes>
+    <PackageReleaseNotes>Session maintenance and readme update</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

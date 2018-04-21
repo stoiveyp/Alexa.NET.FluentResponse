@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27520.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.NET.FluentResponse", "Alexa.NET.FluentResponse\Alexa.NET.FluentResponse.csproj", "{F8438DE7-6DC9-4119-A52C-26E4DCF11F1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.NET.FluentResponse", "Alexa.NET.FluentResponse\Alexa.NET.FluentResponse.csproj", "{F8438DE7-6DC9-4119-A52C-26E4DCF11F1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexa.NET.FluentResponse.Tests", "Alexa.NET.FluentResponse.Tests\Alexa.NET.FluentResponse.Tests.csproj", "{57DC3787-19AB-4CD2-A6CF-94B64318511B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa.NET.FluentResponse.Tests", "Alexa.NET.FluentResponse.Tests\Alexa.NET.FluentResponse.Tests.csproj", "{57DC3787-19AB-4CD2-A6CF-94B64318511B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2417DE63-C633-4F01-B275-348138AD458A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
