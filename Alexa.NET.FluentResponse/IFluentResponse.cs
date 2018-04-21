@@ -1,4 +1,5 @@
 ﻿using System;
+using Alexa.NET.Request;
 using Alexa.NET.Response;
 using Alexa.NET.Response.Ssml;
 
@@ -8,18 +9,27 @@ namespace Alexa.NET.FluentResponse
     {
         SkillResponse Response { get; }
 
-        IFluentResponse AddSpeech(string text);
-        IFluentResponse AddSpeech(Speech speech);
-        IFluentResponse AddSpeech(IOutputSpeech speech);
+        IFluentResponse Speak(string text);
+        IFluentResponse Speak(Speech speech);
+        IFluentResponse Speak(IOutputSpeech speech);
 
-        IFluentResponse WithReprompt(string text);
-        IFluentResponse WithReprompt(Speech ssml);
-        IFluentResponse WithReprompt(IOutputSpeech output);
+        IFluentResponse Reprompt(string text);
+        IFluentResponse Reprompt(Speech ssml);
+        IFluentResponse Reprompt(IOutputSpeech output);
 
         IFluentResponse WithSimpleCard(string title, string content);
 		IFluentResponse WithStandardCard(string title, string content);
 		IFluentResponse WithStandardCard(string title, string content, string smallImageUri, string largeImageUri);
 		IFluentResponse WithLinkAccountCard();
         IFluentResponse WithAskForPermissionConsentCard(params string[] permissions);
+
+        IFluentResponse AddDelegateDirective();
+        IFluentResponse AddDelegateDirective(Intent updatedIntent);
+        IFluentResponse AddElicitSlotDirective(string slotName);
+        IFluentResponse AddElicitSlotDirective(string slotName, Intent updatedIntent);
+        IFluentResponse AddConfirmSlotDirective(string slotName);
+        IFluentResponse AddConfirmSlotDirective(string slotName, Intent updatedIntent);
+        IFluentResponse AddConfirmIntentDirective();
+        IFluentResponse AddConfirmIntentDirective(Intent updatedIntent);
     }
 }

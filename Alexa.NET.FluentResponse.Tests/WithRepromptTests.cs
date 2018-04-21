@@ -10,7 +10,7 @@ namespace Alexa.NET.FluentResponse.Tests
         [Fact]
         public void PlainTextReprompt()
         {
-            var response = Fluent.Builder().WithReprompt("huh").Response;
+            var response = Fluent.Builder().Reprompt("huh").Response;
             Assert.NotNull(response.Response.Reprompt);
             Assert.NotNull(response.Response.Reprompt.OutputSpeech);
             Assert.IsType<PlainTextOutputSpeech>(response.Response.Reprompt.OutputSpeech);
@@ -20,7 +20,7 @@ namespace Alexa.NET.FluentResponse.Tests
 
         [Fact]
         public void SsmlReprompt(){
-            var response = Fluent.Builder().WithReprompt(new Speech(new PlainText("huh"))).Response;
+            var response = Fluent.Builder().Reprompt(new Speech(new PlainText("huh"))).Response;
             Assert.NotNull(response.Response.Reprompt);
             Assert.NotNull(response.Response.Reprompt.OutputSpeech);
             Assert.IsType<SsmlOutputSpeech>(response.Response.Reprompt.OutputSpeech);
@@ -32,7 +32,7 @@ namespace Alexa.NET.FluentResponse.Tests
         public void OutputReprompt()
         {
             var output = new PlainTextOutputSpeech { Text = "huh" };
-            var response = Fluent.Builder().WithReprompt(output).Response;
+            var response = Fluent.Builder().Reprompt(output).Response;
             Assert.NotNull(response.Response.Reprompt);
             Assert.NotNull(response.Response.Reprompt.OutputSpeech);
             Assert.Equal(output, response.Response.Reprompt.OutputSpeech);
