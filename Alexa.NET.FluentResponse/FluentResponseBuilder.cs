@@ -35,7 +35,12 @@ namespace Alexa.NET.FluentResponse
             return this;
         }
 
-        public IFluentResponse WithReprompt(string text)
+		public IFluentResponse WithLinkAccountCard()
+		{
+			throw new NotImplementedException();
+		}
+
+		public IFluentResponse WithReprompt(string text)
         {
             _reprompt = new Reprompt { OutputSpeech = new PlainTextOutputSpeech { Text = text } };
             return this;
@@ -58,5 +63,23 @@ namespace Alexa.NET.FluentResponse
             _card = new SimpleCard { Title = title, Content = content };
             return this;
         }
-    }
+
+		public IFluentResponse WithStandardCard(string title, string content)
+		{
+			return WithStandardCard(title, content, null, null);
+		}
+
+		public IFluentResponse WithStandardCard(string title, string content, string smallImageUri, string largeImageUri)
+		{
+			var card = new StandardCard { Title = title, Content = content };
+
+			if(!string.IsNullOrWhiteSpace(smallImageUri) || !string.IsNullOrWhiteSpace(largeImageUri))
+			{
+				card.Image = new CardImage { SmallImageUrl = smallImageUri, LargeImageUrl = largeImageUri };
+			}
+
+			_card = card;
+			return this;
+		}
+	}
 }
