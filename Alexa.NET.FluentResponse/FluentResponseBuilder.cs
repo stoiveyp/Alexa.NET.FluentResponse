@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
 using Alexa.NET.Response.Directive;
@@ -176,6 +177,32 @@ namespace Alexa.NET.FluentResponse
         public IFluentResponse AddAudioPlayerClearQueueDirective(ClearBehavior behavior)
         {
             Directives.Add(new ClearQueueDirective{ClearBehavior = behavior});
+            return this;
+        }
+
+        public IFluentResponse AddRenderTemplateDirective(ITemplate template)
+        {
+            Directives.Add(new DisplayRenderTemplateDirective{Template=template});
+            return this;
+        }
+
+        public IFluentResponse AddHintDirective(string hint)
+        {
+            Directives.Add(new HintDirective {Hint = new Hint {Text = hint}});
+            return this;
+        }
+
+        public IFluentResponse AddVideoAppLaunchDirective(string url)
+        {
+            Directives.Add(new VideoAppDirective(url));
+            return this;
+        }
+
+        public IFluentResponse AddVideoAppLaunchDirective(string url, string title, string subtitle)
+        {
+            var directive = new VideoAppDirective(url);
+            directive.VideoItem.Metadata =new VideoItemMetadata{Title=title,Subtitle = subtitle};
+            Directives.Add(directive);
             return this;
         }
     }
