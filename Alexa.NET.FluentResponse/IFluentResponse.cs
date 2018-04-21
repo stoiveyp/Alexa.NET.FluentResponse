@@ -20,5 +20,6 @@ namespace Alexa.NET.FluentResponse
 		IFluentResponse WithStandardCard(string title, string content);
 		IFluentResponse WithStandardCard(string title, string content, string smallImageUri, string largeImageUri);
 		IFluentResponse WithLinkAccountCard();
+        IFluentResponse WithAskForPermissionConsentCard(params string[] permissions);
     }
 }

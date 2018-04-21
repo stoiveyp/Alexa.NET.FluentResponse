@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Xunit;
 
@@ -62,5 +64,19 @@ namespace Alexa.NET.FluentResponse.Tests
             Assert.Equal(builder, result);
 			Assert.IsType<LinkAccountCard>(result.Response.Response.Card);
 		}
+
+        [Fact]
+        public void WithAskForPermissionConsentCard()
+        {
+            var builder = Fluent.Builder();
+            var result = builder.WithAskForPermissionConsentCard(RequestedPermission.AddressCountryAndPostalCode);
+
+            Assert.NotNull(result);
+            Assert.Equal(builder, result);
+            Assert.IsType<AskForPermissionsConsentCard>(result.Response.Response.Card);
+            var card = (AskForPermissionsConsentCard) result.Response.Response.Card;
+            Assert.Single(card.Permissions);
+            Assert.Equal(RequestedPermission.AddressCountryAndPostalCode,card.Permissions.First());
+        }
     }
 }

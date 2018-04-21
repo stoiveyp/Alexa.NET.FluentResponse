@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Alexa.NET.Response;
 using Alexa.NET.Response.Ssml;
 
@@ -34,11 +35,6 @@ namespace Alexa.NET.FluentResponse
            _speech = speech;
             return this;
         }
-
-		public IFluentResponse WithLinkAccountCard()
-		{
-			throw new NotImplementedException();
-		}
 
 		public IFluentResponse WithReprompt(string text)
         {
@@ -81,5 +77,17 @@ namespace Alexa.NET.FluentResponse
 			_card = card;
 			return this;
 		}
-	}
+
+        public IFluentResponse WithLinkAccountCard()
+        {
+            _card = new LinkAccountCard();
+            return this;
+        }
+
+        public IFluentResponse WithAskForPermissionConsentCard(params string[] permissions)
+        {
+            _card = new AskForPermissionsConsentCard{Permissions=permissions.ToList()};
+            return this;
+        }
+    }
 }
