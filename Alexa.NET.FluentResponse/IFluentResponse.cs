@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
 using Alexa.NET.Response.Directive;
@@ -42,5 +43,8 @@ namespace Alexa.NET.FluentResponse
         IFluentResponse AddHintDirective(string hint);
         IFluentResponse AddVideoAppLaunchDirective(string url);
         IFluentResponse AddVideoAppLaunchDirective(string url, string title, string subtitle);
+
+        IFluentResponse AndShouldEndSession(bool? end);
+        IFluentResponse WithSession(Dictionary<string, object> session);
     }
 }

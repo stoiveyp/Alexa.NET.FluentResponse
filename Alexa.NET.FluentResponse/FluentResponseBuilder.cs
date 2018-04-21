@@ -15,7 +15,8 @@ namespace Alexa.NET.FluentResponse
         private Reprompt SpeechReprompt;
         private ICard Card;
         private readonly List<IDirective> Directives = new List<IDirective>();
-        private bool? _shouldEndSession = null;
+        private bool? ShouldEndSession = null;
+        private Dictionary<string, object> Session = null;
 
         public SkillResponse Response => new SkillResponse
         {
@@ -25,8 +26,9 @@ namespace Alexa.NET.FluentResponse
                 Reprompt = SpeechReprompt,
                 Card = Card,
                 Directives = Directives,
-                ShouldEndSession = _shouldEndSession
-            }
+                ShouldEndSession = ShouldEndSession
+            },
+            SessionAttributes = Session
         };
 
         public IFluentResponse Speak(string text)
@@ -203,6 +205,18 @@ namespace Alexa.NET.FluentResponse
             var directive = new VideoAppDirective(url);
             directive.VideoItem.Metadata =new VideoItemMetadata{Title=title,Subtitle = subtitle};
             Directives.Add(directive);
+            return this;
+        }
+
+        public IFluentResponse AndShouldEndSession(bool? end)
+        {
+            ShouldEndSession = end;
+            return this;
+        }
+
+        public IFluentResponse WithSession(Dictionary<string, object> session)
+        {
+            Session = session;
             return this;
         }
     }
