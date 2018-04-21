@@ -8,7 +8,7 @@ using Alexa.NET.Response.Ssml;
 
 namespace Alexa.NET.FluentResponse
 {
-    public class FluentResponseBuilder:IFluentResponse
+    public class FluentResponseBuilder : IFluentResponse
     {
         private IOutputSpeech Speech;
         private Reprompt SpeechReprompt;
@@ -16,14 +16,17 @@ namespace Alexa.NET.FluentResponse
         private readonly List<IDirective> Directives = new List<IDirective>();
         private bool? _shouldEndSession = null;
 
-        public SkillResponse Response => new SkillResponse { 
-            Response = new ResponseBody {
+        public SkillResponse Response => new SkillResponse
+        {
+            Response = new ResponseBody
+            {
                 OutputSpeech = Speech,
                 Reprompt = SpeechReprompt,
                 Card = Card,
                 Directives = Directives,
                 ShouldEndSession = _shouldEndSession
-            } };
+            }
+        };
 
         public IFluentResponse Speak(string text)
         {
@@ -39,11 +42,11 @@ namespace Alexa.NET.FluentResponse
 
         public IFluentResponse Speak(IOutputSpeech speech)
         {
-           Speech = speech;
+            Speech = speech;
             return this;
         }
 
-		public IFluentResponse Reprompt(string text)
+        public IFluentResponse Reprompt(string text)
         {
             SpeechReprompt = new Reprompt { OutputSpeech = new PlainTextOutputSpeech { Text = text } };
             return this;
@@ -58,7 +61,7 @@ namespace Alexa.NET.FluentResponse
         public IFluentResponse Reprompt(IOutputSpeech speech)
         {
             SpeechReprompt = new Reprompt { OutputSpeech = speech };
-            return this;            
+            return this;
         }
 
         public IFluentResponse WithSimpleCard(string title, string content)
@@ -67,23 +70,23 @@ namespace Alexa.NET.FluentResponse
             return this;
         }
 
-		public IFluentResponse WithStandardCard(string title, string content)
-		{
-			return WithStandardCard(title, content, null, null);
-		}
+        public IFluentResponse WithStandardCard(string title, string content)
+        {
+            return WithStandardCard(title, content, null, null);
+        }
 
-		public IFluentResponse WithStandardCard(string title, string content, string smallImageUri, string largeImageUri)
-		{
-			var card = new StandardCard { Title = title, Content = content };
+        public IFluentResponse WithStandardCard(string title, string content, string smallImageUri, string largeImageUri)
+        {
+            var card = new StandardCard { Title = title, Content = content };
 
-			if(!string.IsNullOrWhiteSpace(smallImageUri) || !string.IsNullOrWhiteSpace(largeImageUri))
-			{
-				card.Image = new CardImage { SmallImageUrl = smallImageUri, LargeImageUrl = largeImageUri };
-			}
+            if (!string.IsNullOrWhiteSpace(smallImageUri) || !string.IsNullOrWhiteSpace(largeImageUri))
+            {
+                card.Image = new CardImage { SmallImageUrl = smallImageUri, LargeImageUrl = largeImageUri };
+            }
 
-			Card = card;
-			return this;
-		}
+            Card = card;
+            return this;
+        }
 
         public IFluentResponse WithLinkAccountCard()
         {
@@ -93,7 +96,7 @@ namespace Alexa.NET.FluentResponse
 
         public IFluentResponse WithAskForPermissionConsentCard(params string[] permissions)
         {
-            Card = new AskForPermissionsConsentCard{Permissions=permissions.ToList()};
+            Card = new AskForPermissionsConsentCard { Permissions = permissions.ToList() };
             return this;
         }
 
@@ -105,7 +108,7 @@ namespace Alexa.NET.FluentResponse
 
         public IFluentResponse AddDelegateDirective(Intent updatedIntent)
         {
-            Directives.Add(new DialogDelegate{UpdatedIntent = updatedIntent });
+            Directives.Add(new DialogDelegate { UpdatedIntent = updatedIntent });
             return this;
         }
 
@@ -117,7 +120,7 @@ namespace Alexa.NET.FluentResponse
 
         public IFluentResponse AddElicitSlotDirective(string slotName, Intent updatedIntent)
         {
-            Directives.Add(new DialogElicitSlot(slotName){UpdatedIntent = updatedIntent });
+            Directives.Add(new DialogElicitSlot(slotName) { UpdatedIntent = updatedIntent });
             return this;
         }
 
@@ -129,7 +132,7 @@ namespace Alexa.NET.FluentResponse
 
         public IFluentResponse AddConfirmSlotDirective(string slotName, Intent updatedIntent)
         {
-            Directives.Add(new DialogConfirmSlot(slotName){UpdatedIntent= updatedIntent });
+            Directives.Add(new DialogConfirmSlot(slotName) { UpdatedIntent = updatedIntent });
             return this;
         }
 
@@ -141,7 +144,38 @@ namespace Alexa.NET.FluentResponse
 
         public IFluentResponse AddConfirmIntentDirective(Intent updatedIntent)
         {
-            Directives.Add(new DialogConfirmIntent{UpdatedIntent = updatedIntent});
+            Directives.Add(new DialogConfirmIntent { UpdatedIntent = updatedIntent });
+            return this;
+        }
+
+        public IFluentResponse AddAudioPlayerPlayDirective(PlayBehavior behavior, string url, int offsetMilliseconds,
+            string previousToken)
+        {
+            Directives.Add(new AudioPlayerPlayDirective
+            {
+                PlayBehavior = behavior,
+                AudioItem = new AudioItem
+                {
+                    Stream = new AudioItemStream
+                    {
+                        Token = previousToken,
+                        Url = url,
+                        OffsetInMilliseconds = offsetMilliseconds
+                    }
+                }
+            });
+            return this;
+        }
+
+        public IFluentResponse AddAudioPlayerStopDirective()
+        {
+            Directives.Add(new StopDirective());
+            return this;
+        }
+
+        public IFluentResponse AddAudioPlayerClearQueueDirective(ClearBehavior behavior)
+        {
+            Directives.Add(new ClearQueueDirective{ClearBehavior = behavior});
             return this;
         }
     }

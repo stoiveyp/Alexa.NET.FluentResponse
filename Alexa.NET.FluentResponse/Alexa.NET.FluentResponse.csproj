@@ -11,7 +11,7 @@
     <Product />
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>Add dialog management support</PackageReleaseNotes>
+    <PackageReleaseNotes>Add support for audio player</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
