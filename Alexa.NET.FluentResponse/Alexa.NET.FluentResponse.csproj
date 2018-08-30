@@ -11,7 +11,7 @@
     <Product />
     <RepositoryUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/stoiveyp/Alexa.NET.FluentResponse/LICENSE</PackageLicenseUrl>
-    <PackageReleaseNotes>Session maintenance and readme update</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix issue where version is not set on response output</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

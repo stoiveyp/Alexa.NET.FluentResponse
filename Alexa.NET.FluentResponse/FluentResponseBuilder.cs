@@ -28,6 +28,7 @@ namespace Alexa.NET.FluentResponse
                 Directives = Directives,
                 ShouldEndSession = ShouldEndSession
             },
+            Version="1.0",
             SessionAttributes = Session
         };
 
